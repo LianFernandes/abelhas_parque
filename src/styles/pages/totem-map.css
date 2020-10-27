@@ -1,0 +1,20 @@
+#page-map {
+    width: 100vw;
+    height: 100vh;
+}
+
+#page-map nav {
+    display: flex;
+    justify-content: safe;
+    align-items: center;
+    min-height: 8vh;
+    background-color: goldenrod;
+}
+
+#page-map img {
+    margin-left: 10px;
+}
+
+#page-map nav h2 {
+margin-left: 15px;
+}
