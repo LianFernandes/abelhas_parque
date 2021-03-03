@@ -1,20 +1,59 @@
 #page-map {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 92vh;
 }
 
 #page-map nav {
-    display: flex;
-    justify-content: safe;
-    align-items: center;
-    min-height: 8vh;
-    background-color: goldenrod;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 8vh;
+  background-color: #ffca02;
 }
 
 #page-map img {
-    margin-left: 10px;
+  max-height: 4rem;
+  margin-left: 1rem;
 }
 
-#page-map nav h2 {
-margin-left: 15px;
+#page-map nav button {
+  width: 48px;
+  height: 48px;
+  margin-right: 2rem;
+
+  border: 0;
+
+  background: #ffca02;
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-map nav button:hover {
+  opacity: 0.3;
+}
+
+#page-map .map-popup .leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+}
+
+#page-map .map-popup .leaflet-popup-content {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 8px 12px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#page-map .map-popup .leaflet-popup-tip-container {
+  display: none;
 }
