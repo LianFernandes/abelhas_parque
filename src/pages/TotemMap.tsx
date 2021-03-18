@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { FiArrowLeft } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { MapModal } from "../components/MapModal";
 
+import { modalInfo } from '../modalinfo.js'
 import logo from "../images/logo2.svg";
 import mapMarker from "../images/Map_marker.svg";
 import beeMarker from "../images/colmeia.svg";
@@ -27,6 +29,12 @@ const beeIcon = L.icon({
   popupAnchor: [170, -6],
 });
 
+interface ModalInfo {
+  name: string;
+  sName: string;
+  description: string;
+}
+
 interface Totem {
   id: string;
   latitude: number;
@@ -34,8 +42,47 @@ interface Totem {
   name: string;
 }
 
+interface TotemParams {
+  coordinates: string;
+}
+
 function TotemMap() {
+  const { coordinates } = useParams<TotemParams>();
+  let lati = 0;
+  let longi = 0;
+
+  try {
+    lati = Number(coordinates.split(", ")[0]);
+    longi = Number(coordinates.split(" ")[1]);
+  } catch (error) { }
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [totems, setTotems] = useState<Totem[]>([]);
+  const { goBack } = useHistory();
+
+  // const getData = () => {
+  //   fetch("modalinfo.json", {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //   })
+  //     .then(function (response) {
+  //       console.log(response);
+  //       return response.json();
+  //     })
+  //     .then(function (myJson) {
+  //       console.log(myJson);
+  //       setModalInfo(myJson)
+  //     });
+  // };
+
+  function openModal(totemName: string) {
+    console.log(modalInfo)
+    const index = modalInfo.findIndex(o => o.name == totemName)
+    console.log(index)
+    setIsModalOpen(true);
+  }
 
   useEffect(() => {
     api.get("totems").then((response) => {
@@ -43,9 +90,8 @@ function TotemMap() {
     });
   }, []);
 
-  const { goBack } = useHistory();
-
   return (
+
     <div id="page-map">
       <nav>
         <img src={logo} alt="Instituto Abelha Nativa" />
@@ -56,12 +102,14 @@ function TotemMap() {
       </nav>
 
       <Map
-        center={[-15.804664, -47.923214]}
-        zoom={21}
+        center={
+          coordinates === undefined ? [-15.8013195, -47.9114457] : [lati, longi]
+        }
+        zoom={15}
         style={{ width: "100%", height: "100%" }}
       >
         <TileLayer
-        url={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+          url={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
         />
         {/* url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
         {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
@@ -72,12 +120,12 @@ function TotemMap() {
 
         <Marker icon={mapIcon} position={[-15.804664, -47.923214]}>
           <Popup
-            colseButton={false}
+            closeButton={false}
             minWidth={240}
-            masWidth={240}
+            maxWidth={240}
             className="map-popup"
           >
-            Instituto Abelha Nativa
+            <h3>Instituto Abelha Nativa</h3>
           </Popup>
         </Marker>
 
@@ -89,17 +137,27 @@ function TotemMap() {
               key={totem.id}
             >
               <Popup
-                colseButton={false}
+                closeButton={false}
                 minWidth={240}
-                masWidth={240}
+                maxWidth={240}
                 className="map-popup"
               >
-                {totem.name}
+                {/* <img src={`imgtest/${totem.name}.jpeg`} alt=""/> */}
+                <br></br>
+                <h4>Nome da Espécie: {totem.name}</h4>
+                <button onClick={() => openModal(totem.name)}>Saiba mais</button>
               </Popup>
             </Marker>
           );
         })}
       </Map>
+      {isModalOpen &&
+        <MapModal
+          name={modalInfo[0].name}
+          sName={modalInfo[0].sName}
+          description={modalInfo[0].description}
+          closeButtonOnClick={() => setIsModalOpen(false)}
+        />}
     </div>
   );
 }

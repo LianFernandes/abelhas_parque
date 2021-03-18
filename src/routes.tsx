@@ -10,7 +10,8 @@ function Routes() {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={TotemMap} />
-                <Route path="/createtotems" exact component={CreateTotem} />
+                <Route path="/createtotems" component={CreateTotem} />
+                <Route path="/:coordinates" component={TotemMap} />
             </Switch>
         </BrowserRouter>
     );
