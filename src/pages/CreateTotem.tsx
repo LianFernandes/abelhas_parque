@@ -2,6 +2,9 @@ import React, { useState, FormEvent, useEffect } from "react";
 
 import api from "../services/api";
 import "../styles/pages/create-totem.css";
+import { modalInfo } from "../modalinfo.js";
+
+import QRCode from "qrcode.react";
 
 interface Totem {
   id: string;
@@ -16,10 +19,11 @@ export default function CreateTotem() {
   const [longitude, setLongitude] = useState("");
   const [totems, setTotems] = useState<Totem[]>([]);
   const [refreshPage, setRefreshPage] = useState(false);
+  const [qrString, setQrString] = useState("");
 
   useEffect(() => {
     api.get("totems").then((response) => {
-      console.log(response)
+      console.log(response);
       setTotems(response.data);
       setRefreshPage(false);
     });
@@ -35,6 +39,18 @@ export default function CreateTotem() {
   async function deleteTotem(totemId: string) {
     await api.delete(`totems/${totemId}`);
     setRefreshPage(true);
+  }
+
+  function createQR(latitude: number, longitude: number, name: string) {
+    const address = "http://localhost:3000/";
+    const newQrString =
+      address +
+      String(latitude) +
+      "," +
+      String(longitude) +
+      "," +
+      String(modalInfo.findIndex((o) => o.name === name));
+    setQrString(newQrString);
   }
 
   return (
@@ -71,32 +87,46 @@ export default function CreateTotem() {
           Confirmar
         </button>
       </form>
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th></th>
-          </tr>
-        </thead>
-        {totems.map((totem) => {
-          return (
-            <tbody key={totem.id}>
-              <tr>
-                <td>{totem.name}</td>
-                <td>{totem.latitude}</td>
-                <td>{totem.longitude}</td>
-                <td>
-                  <button type="button" onClick={() => deleteTotem(totem.id)}>
-                    delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
+      <div className="qr-and-data-table">
+
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th></th>
+            </tr>
+          </thead>
+          {totems.map((totem) => {
+            return (
+              <tbody key={totem.id}>
+                <tr>
+                  <td>{totem.name}</td>
+                  <td>{totem.latitude}</td>
+                  <td>{totem.longitude}</td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        createQR(totem.latitude, totem.longitude, totem.name)
+                      }
+                    >
+                      QR
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" onClick={() => deleteTotem(totem.id)}>
+                      delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
+        <QRCode value={qrString} size={400} />
+      </div>
     </div>
   );
 }

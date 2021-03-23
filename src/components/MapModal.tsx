@@ -11,7 +11,7 @@ interface MapModalProps {
 }
 
 export function MapModal(props: MapModalProps) {
-  
+
   return (
     <div className="modal-overlay active">
       <div className="modal">

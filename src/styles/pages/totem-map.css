@@ -1,6 +1,6 @@
 #page-map {
   width: 100vw;
-  height: 92vh;
+  height: 89vh;
 }
 
 #page-map nav {
@@ -101,9 +101,6 @@
   display: block;
 }
 
-.modal-header img {
-}
-
 .modal button {
   position: absolute;
   right: 0.5rem;
@@ -116,4 +113,10 @@
 .modal span {
   font-weight: 300;
   font-style: italic;
+}
+
+footer {
+background: #ffca02;
+display: flex;
+justify-content: center;
 }

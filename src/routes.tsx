@@ -11,7 +11,7 @@ function Routes() {
             <Switch>
                 <Route path="/" exact component={TotemMap} />
                 <Route path="/createtotems" component={CreateTotem} />
-                <Route path="/:coordinates" component={TotemMap} />
+                <Route path="/:qrParam" component={TotemMap} />
             </Switch>
         </BrowserRouter>
     );
