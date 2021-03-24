@@ -1,6 +1,6 @@
 #page-map {
   width: 100vw;
-  height: 89vh;
+  height: 88vh;
 }
 
 #page-map nav {
@@ -11,7 +11,7 @@
   background-color: #ffca02;
 }
 
-#page-map img {
+#page-map nav img {
   max-height: 4rem;
   margin-left: 1rem;
 }
@@ -54,65 +54,23 @@
   align-items: center;
 }
 
+#page-map .map-popup .leaflet-popup-content button {
+    font-size: 1rem;
+    color: #000;
+    background: #ffca02;
+    border: 0;
+    border-radius: 0.25rem;
+    height: 3rem;
+
+    transition: background-color 0.2s;
+}
+
+#page-map .map-popup .leaflet-popup-content button:hover {
+  opacity: 0.8;
+}
+
 #page-map .map-popup .leaflet-popup-tip-container {
   display: none;
-}
-
-.modal-overlay {
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(0, 0, 0, 0.7);
-
-  position: fixed;
-  top: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  opacity: 0;
-  visibility: hidden;
-  z-index: 999;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal {
-    background: #F0F3f5;
-    padding: 2.4rem;
-    position: relative;
-    z-index: 1;
-}
-
-#modal {
-  max-width: 500px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-#modal-text {
-  display: block;
-}
-
-.modal button {
-  position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
-  background: transparent;
-  border: 0;
-  font-size: 0;
-}
-
-.modal span {
-  font-weight: 300;
-  font-style: italic;
 }
 
 footer {

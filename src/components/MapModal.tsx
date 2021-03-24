@@ -1,5 +1,3 @@
-import React from 'react';
-
 import '../styles/components/mapModal.css';
 import close from "../images/close.svg";
 
@@ -21,15 +19,14 @@ export function MapModal(props: MapModalProps) {
             <span>{props.sName}</span>
           </div>
           <img
+            id="modal-img"
             src={`imgtest/${props.name}.jpeg`}
             alt="zumzum"
-            width="200"
-            height="200"
           />
         </div>
         <p>
           {props.description}
-            </p>
+        </p>
         <div className="input-group actions">
           <button onClick={props.closeButtonOnClick}>
             <img src={close} alt="Fechar" />
