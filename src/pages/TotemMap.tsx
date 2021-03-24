@@ -146,7 +146,7 @@ function TotemMap() {
           closeButtonOnClick={() => setIsModalOpen(false)}
         />
       )}
-      <footer><span>autoria <a href="#">lian</a></span></footer>
+      <footer><span>autoria <a href="https://github.com/lian-fernandes">lian</a></span></footer>
     </div>
   );
 }
