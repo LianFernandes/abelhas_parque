@@ -1,6 +1,7 @@
 #page-map {
   width: 100vw;
-  height: 100vh;
+  position: fixed;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
