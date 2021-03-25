@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  ZoomControl,
+} from "react-leaflet";
 import L from "leaflet";
 import { FiArrowLeft } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
@@ -24,9 +30,9 @@ const mapIcon = L.icon({
 
 const beeIcon = L.icon({
   iconUrl: beeMarker,
-  iconSize: [60, 90],
-  iconAnchor: [30, 90],
-  popupAnchor: [170, -6],
+  iconSize: [40, 60],
+  iconAnchor: [20, 60],
+  popupAnchor: [170, 10],
 });
 
 interface Totem {
@@ -42,7 +48,7 @@ interface QrParams {
 
 function TotemMap() {
   const { qrParam } = useParams<QrParams>();
-  console.log(qrParam)
+  console.log(qrParam);
   const { goBack } = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totems, setTotems] = useState<Totem[]>([]);
@@ -66,7 +72,7 @@ function TotemMap() {
   try {
     lati = Number(qrParam.split(",")[0]);
     longi = Number(qrParam.split(",")[1]);
-  } catch (error) { }
+  } catch (error) {}
 
   useEffect(() => {
     api.get("totems").then((response) => {
@@ -86,57 +92,56 @@ function TotemMap() {
           <FiArrowLeft size={24} color="#000" />
         </button>
       </nav>
+        <MapContainer
+          center={
+            qrParam === undefined ? [-15.8013195, -47.9114457] : [lati, longi]
+          }
+          zoom={15}
+          style={{ width: "100%", height: "100%" }}
+          zoomControl={false}
+        >
+          <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <ZoomControl />
+          {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
+          {/* url={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
+          {/* url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
+          {/* url={`https://api.mapbox.com/styles/v1/mapbox/navigation-preview-day-v4/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
+          {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
+          {/* url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
 
-      <MapContainer
-        center={qrParam === undefined ? [-15.8013195, -47.9114457] : [lati, longi]}
-        zoom={15}
-        style={{ width: "100%", height: "100%" }}
-        zoomControl={false}
-      >
-        <TileLayer
-          url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <ZoomControl />
-        {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-        {/* url={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-        {/* url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-        {/* url={`https://api.mapbox.com/styles/v1/mapbox/navigation-preview-day-v4/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-        {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-        {/* url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-
-        <Marker icon={mapIcon} position={[-15.804664, -47.923214]}>
-          <Popup
-            closeButton={false}
-            minWidth={240}
-            maxWidth={240}
-            className="map-popup"
-          >
-            <h3>Instituto Abelha Nativa</h3>
-          </Popup>
-        </Marker>
-
-        {totems.map((totem) => {
-          return (
-            <Marker
-              icon={beeIcon}
-              position={[totem.latitude, totem.longitude]}
-              key={totem.id}
+          <Marker icon={mapIcon} position={[-15.804664, -47.923214]}>
+            <Popup
+              closeButton={false}
+              minWidth={240}
+              maxWidth={240}
+              className="map-popup"
             >
-              <Popup
-                closeButton={false}
-                minWidth={240}
-                maxWidth={240}
-                className="map-popup"
+              <h4>Instituto Abelha Nativa</h4>
+            </Popup>
+          </Marker>
+
+          {totems.map((totem) => {
+            return (
+              <Marker
+                icon={beeIcon}
+                position={[totem.latitude, totem.longitude]}
+                key={totem.id}
               >
-                <h4>Nome da Espécie: {totem.name}</h4>
-                <button onClick={() => openModal(totem.name)}>
-                  Saiba mais
-                </button>
-              </Popup>
-            </Marker>
-          );
-        })}
-      </MapContainer>
+                <Popup
+                  closeButton={false}
+                  minWidth={240}
+                  maxWidth={240}
+                  className="map-popup"
+                >
+                  <h4>Nome da Espécie: {totem.name}</h4>
+                  <button onClick={() => openModal(totem.name)}>
+                    Saiba mais
+                  </button>
+                </Popup>
+              </Marker>
+            );
+          })}
+        </MapContainer>
       {openModalWithParam && openModalParams()}
       {isModalOpen && (
         <MapModal
@@ -146,7 +151,11 @@ function TotemMap() {
           closeButtonOnClick={() => setIsModalOpen(false)}
         />
       )}
-      <footer><span>autoria <a href="https://github.com/lian-fernandes">lian</a></span></footer>
+      <footer>
+        <span>
+          autoria <a href="https://github.com/lian-fernandes">lian</a>
+        </span>
+      </footer>
     </div>
   );
 }

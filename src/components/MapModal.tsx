@@ -24,9 +24,11 @@ export function MapModal(props: MapModalProps) {
             alt="zumzum"
           />
         </div>
+        <div className="description">
         <p>
           {props.description}
         </p>
+        </div>
         <div className="input-group actions">
           <button onClick={props.closeButtonOnClick}>
             <img src={close} alt="Fechar" />

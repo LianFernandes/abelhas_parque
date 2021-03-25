@@ -1,19 +1,22 @@
 #page-map {
   width: 100vw;
-  height: 88vh;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 #page-map nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 8vh;
-  background-color: #ffca02;
+  background-color: var(--yellow);
 }
 
 #page-map nav img {
-  max-height: 4rem;
+  max-height: 2.5rem;
   margin-left: 1rem;
+  margin-right: 2rem;
 }
 
 #page-map nav button {
@@ -23,7 +26,7 @@
 
   border: 0;
 
-  background: #ffca02;
+  background: var(--yellow);
   border-radius: 16px;
 
   cursor: pointer;
@@ -55,14 +58,14 @@
 }
 
 #page-map .map-popup .leaflet-popup-content button {
-    font-size: 1rem;
-    color: #000;
-    background: #ffca02;
-    border: 0;
-    border-radius: 0.25rem;
-    height: 3rem;
+  font-size: 1rem;
+  color: #000;
+  background: var(--yellow);
+  border: 0;
+  border-radius: 0.25rem;
+  height: 3rem;
 
-    transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 #page-map .map-popup .leaflet-popup-content button:hover {
@@ -74,7 +77,7 @@
 }
 
 footer {
-background: #ffca02;
-display: flex;
-justify-content: center;
+  background: var(--yellow);
+  display: flex;
+  justify-content: center;
 }

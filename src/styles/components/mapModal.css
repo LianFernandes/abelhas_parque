@@ -22,24 +22,19 @@
 }
 
 .modal {
-    background: #F0F3f5;
-    padding: 2.4rem;
-    position: relative;
-    z-index: 1;
-    max-width: 500px;
+  background: #f0f3f5;
+  padding: 2.4rem;
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  max-height: 100vh;
 }
-
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   height: 8rem;
   margin: 0.5rem 0;
-
-}
-
-#modal-text {
-
 }
 
 #modal-img {
@@ -47,14 +42,14 @@
   width: auto;
 }
 
-p {
-text-align: justify;
+.description p {
+  line-height: 1.2;
+  overflow: auto;
 }
-
 
 .modal button {
   position: absolute;
-  right: 0.5rem;
+  right: 1rem;
   top: 0.5rem;
   background: transparent;
   border: 0;
