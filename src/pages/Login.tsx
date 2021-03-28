@@ -74,6 +74,41 @@ const Login: React.FC = () => {
 
             </div>
           </div>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="password">Password:</label>
+            <input 
+              type="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input type="submit" value="Enviar" />
+          </form>
+
+          <GoogleLogin
+            clientId="844861144462-k092319m7l1r91djpalqjgi5shsmrgt4.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={onSignIn}
+            onFailure={onError}
+            isSignedIn={true}
+            cookiePolicy={'single_host_origin'}
+          />
+
+        </div>
+
+        <div id="auth-footer">
+          <Link to="/register">
+            <button type="button">Registrar</button>
+          </Link>
+
+          <Link to="/forgot">
+            <button type="button">Esqueci minha senha</button>
+          </Link>
         </div>
         
       </>
