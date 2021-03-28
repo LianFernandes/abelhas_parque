@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect } from "react";
 
 import api from "../services/api";
 import "../styles/pages/create-totem.css";
@@ -42,7 +42,7 @@ export default function CreateTotem() {
   }
 
   function createQR(latitude: number, longitude: number, name: string) {
-    const address = "http://localhost:3000/";
+    const address = process.env.APP_URL || "http://localhost:3000/";
     const newQrString =
       address +
       String(latitude) +

@@ -72,7 +72,7 @@ function TotemMap() {
   try {
     lati = Number(qrParam.split(",")[0]);
     longi = Number(qrParam.split(",")[1]);
-  } catch (error) {}
+  } catch (error) { }
 
   useEffect(() => {
     api.get("totems").then((response) => {
@@ -92,56 +92,50 @@ function TotemMap() {
           <FiArrowLeft size={24} color="#000" />
         </button>
       </nav>
-        <MapContainer
-          center={
-            qrParam === undefined ? [-15.8013195, -47.9114457] : [lati, longi]
-          }
-          zoom={15}
-          style={{ width: "100%", height: "100%" }}
-          zoomControl={false}
-        >
-          <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          <ZoomControl />
-          {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-          {/* url={`https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-          {/* url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-          {/* url={`https://api.mapbox.com/styles/v1/mapbox/navigation-preview-day-v4/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-          {/* url={`https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
-          {/* url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`} */}
+      <MapContainer
+        center={
+          qrParam === undefined ? [-15.8013195, -47.9114457] : [lati, longi]
+        }
+        zoom={15}
+        style={{ width: "100%", height: "100%" }}
+        zoomControl={false}
+      >
+        <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <ZoomControl />
 
-          <Marker icon={mapIcon} position={[-15.804664, -47.923214]}>
-            <Popup
-              closeButton={false}
-              minWidth={240}
-              maxWidth={240}
-              className="map-popup"
+        <Marker icon={mapIcon} position={[-15.804664, -47.923214]}>
+          <Popup
+            closeButton={false}
+            minWidth={240}
+            maxWidth={240}
+            className="map-popup"
+          >
+            <h4>Instituto Abelha Nativa</h4>
+          </Popup>
+        </Marker>
+
+        {totems.map((totem) => {
+          return (
+            <Marker
+              icon={beeIcon}
+              position={[totem.latitude, totem.longitude]}
+              key={totem.id}
             >
-              <h4>Instituto Abelha Nativa</h4>
-            </Popup>
-          </Marker>
-
-          {totems.map((totem) => {
-            return (
-              <Marker
-                icon={beeIcon}
-                position={[totem.latitude, totem.longitude]}
-                key={totem.id}
+              <Popup
+                closeButton={false}
+                minWidth={240}
+                maxWidth={240}
+                className="map-popup"
               >
-                <Popup
-                  closeButton={false}
-                  minWidth={240}
-                  maxWidth={240}
-                  className="map-popup"
-                >
-                  <h4>Nome da Espécie: {totem.name}</h4>
-                  <button onClick={() => openModal(totem.name)}>
-                    Saiba mais
+                <h4>Nome da Espécie: {totem.name}</h4>
+                <button onClick={() => openModal(totem.name)}>
+                  Saiba mais
                   </button>
-                </Popup>
-              </Marker>
-            );
-          })}
-        </MapContainer>
+              </Popup>
+            </Marker>
+          );
+        })}
+      </MapContainer>
       {openModalWithParam && openModalParams()}
       {isModalOpen && (
         <MapModal
