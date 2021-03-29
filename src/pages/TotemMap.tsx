@@ -19,8 +19,6 @@ import beeMarker from "../images/colmeia.svg";
 import api from "../services/api";
 
 import "../styles/pages/totem-map.css";
-console.log(process.env)
-console.log(process.env.API_URL)
 
 const mapIcon = L.icon({
   iconUrl: mapMarker,
@@ -49,7 +47,6 @@ interface QrParams {
 
 function TotemMap() {
   const { qrParam } = useParams<QrParams>();
-  console.log(qrParam);
   const { goBack } = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totems, setTotems] = useState<Totem[]>([]);
@@ -73,7 +70,7 @@ function TotemMap() {
   try {
     lati = Number(qrParam.split(",")[0]);
     longi = Number(qrParam.split(",")[1]);
-  } catch (error) { }
+  } catch (error) {}
 
   useEffect(() => {
     api.get("totems").then((response) => {
@@ -131,7 +128,7 @@ function TotemMap() {
                 <h4>Nome da Espécie: {totem.name}</h4>
                 <button onClick={() => openModal(totem.name)}>
                   Saiba mais
-                  </button>
+                </button>
               </Popup>
             </Marker>
           );
