@@ -20,6 +20,7 @@ import api from "../services/api";
 
 import "../styles/pages/totem-map.css";
 console.log(process.env)
+console.log(process.env.API_URL)
 
 const mapIcon = L.icon({
   iconUrl: mapMarker,
