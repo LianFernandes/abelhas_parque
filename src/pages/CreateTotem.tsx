@@ -42,7 +42,7 @@ export default function CreateTotem() {
   }
 
   function createQR(latitude: number, longitude: number, name: string) {
-    const address = process.env.APP_URL || "http://localhost:3000/";
+    const address = process.env.URL || "http://localhost:3000/";
     const newQrString =
       address +
       String(latitude) +
