@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import {
   MapContainer,
   TileLayer,
@@ -20,6 +19,7 @@ import beeMarker from "../images/colmeia.svg";
 import api from "../services/api";
 
 import "../styles/pages/totem-map.css";
+console.log(process.env)
 
 const mapIcon = L.icon({
   iconUrl: mapMarker,
