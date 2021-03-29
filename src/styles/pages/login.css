@@ -11,33 +11,101 @@
   background-color: #333533;
   border-radius: 10px;
   padding: 40px;
+  width: 470px;
+  max-width: 470px;
 }
 
-#logo {
-  font-size: 40px;
-  width: 40px;
-  height: 40px;
+#page-login .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 25px 25px 25px;
+}
+
+#page-login .title img {
+  width: 50px;
+  height: 50px;
+  margin: 0 15px 15px 0;
+}
+
+#page-login .title h1 {
+  color: white;
+  font-size: 25px;
+  margin-bottom: 10px;
 }
 
 .auth-content {
   background-color: white;
   border-radius: 10px;
-  padding: 40px;
+  padding: 20px 30px 10px 30px;
 }
 
-#page-login form{
+#page-login form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+#page-login form .auth-button {
+  margin-top: 10px;
+}
+
+#page-login .input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px 0;
+}
+
+#page-login .input label {
+  color: #635012;
+  font-size: 10px;
+}
+
+#page-login .input input {
+  width: 100%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  color: #635012;
 }
 
 #auth-footer {
   margin: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 #auth-footer  a {
   margin: 10px;
+  margin-bottom: 0;
+  text-decoration-color: #333533;
+}
+
+#auth-footer > div {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.auth-button {
+  border-radius: 5px;
+  border: none;
+  background-color: #333533;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  width: 100%;
+}
+
+.auth-link {
+  color: #333533;
+  font-weight: bold;
+  font-size: 12px;
 }

@@ -1,23 +1,12 @@
-<<<<<<< HEAD
 import { AxiosInstance } from 'axios';
-=======
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
 import React, {
   createContext,
   useState,
   useCallback,
-<<<<<<< HEAD
   useContext,
-  useEffect
 } from 'react';
 import { GoogleLoginResponse, useGoogleLogout } from 'react-google-login';
 import axios, { handleHeader } from '../services/httpService';
-=======
-  useContext
-} from 'react';
-import { GoogleLoginResponse, useGoogleLogout } from 'react-google-login';
-import axios from '../services/httpService';
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
 import { GoogleDto } from './GoogleDto';
 
 interface IUseAuth {
@@ -30,19 +19,12 @@ interface IUseAuth {
   isLogged: () => boolean;
 };
 
-<<<<<<< HEAD
 export interface LoginPayload {
-=======
-interface LoginPayload {
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
   id: string;
   email: string;
   role: string;
   token: string;
-<<<<<<< HEAD
   type: 'google' | 'local'
-=======
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
 };
 
 const AuthContext = createContext({} as IUseAuth);
@@ -58,26 +40,20 @@ export const AuthProvider: React.FC = ({ children }) => {
   });
 
   const Logon = useCallback(async (email: string, password: string) => {
-    const response = await axios.post<LoginPayload>('/auth/login', {
-      email,
-      password
-    });
-
-<<<<<<< HEAD
-    const localCredentials = {
-      ...response.data,
-      type: 'local',
-    } as LoginPayload;
-
-    localStorage.setItem('@ian/credentials', JSON.stringify(localCredentials))
-
-    handleHeader({ isLogged: true, credentials: localCredentials});
-    setCredentials(localCredentials);
-=======
-    localStorage.setItem('@ian/credentials', JSON.stringify(response.data))
-
-    setCredentials(response.data);
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
+      const response = await axios.post<LoginPayload>('/auth/login', {
+        email,
+        password
+      });
+  
+      const localCredentials = {
+        ...response.data,
+        type: 'local',
+      } as LoginPayload;
+  
+      localStorage.setItem('@ian/credentials', JSON.stringify(localCredentials))
+  
+      handleHeader({ isLogged: true, credentials: localCredentials});
+      setCredentials(localCredentials);
   }, []);
 
   const GoogleLogon = useCallback((data: GoogleLoginResponse): void => {
@@ -85,10 +61,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     localStorage.setItem('@ian/credentials', JSON.stringify(googleCredentials));
 
-<<<<<<< HEAD
     handleHeader({ isLogged: true, credentials: googleCredentials});
-=======
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
     setCredentials(googleCredentials);
   }, [])
 
@@ -106,26 +79,18 @@ export const AuthProvider: React.FC = ({ children }) => {
     console.log(response);
   }, []);
 
-  const Logout = useCallback(() => {
-    localStorage.removeItem('@ian/credentials');
-<<<<<<< HEAD
-    signOut();
-    handleHeader({ isLogged: false });
-    setCredentials({} as LoginPayload);
-  }, []);
-
   const {signOut, loaded} = useGoogleLogout({
-=======
-    googleLogout;
-    setCredentials({} as LoginPayload);
-  }, [googleLogout]);
-
-  const googleLogout = useGoogleLogout({
->>>>>>> c3acc1350dfcfcc2168e6cfe6d088851a117e517
     clientId: "844861144462-k092319m7l1r91djpalqjgi5shsmrgt4.apps.googleusercontent.com",
     onLogoutSuccess: () => console.log('Logout sucessfull'),
     onFailure: () => console.log('Logout error')
-  })
+  });
+
+  const Logout = useCallback(() => {
+    localStorage.removeItem('@ian/credentials');
+    signOut();
+    handleHeader({ isLogged: false });
+    setCredentials({} as LoginPayload);
+  }, [signOut]);
 
   const isLogged = useCallback(() => {
     if(credentials.token) {
