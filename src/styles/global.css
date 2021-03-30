@@ -1,36 +1,36 @@
 :root {
-    --yellow: #ffca02;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  --yellow: #ffca02;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+
+body,
+input,
+textarea,
+button {
+  font: 400 1rem "Nunito", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 1080px) {
   html {
-    height: 100vw;
+    font-size: 93.75%;
   }
-  
-  body,
-  input,
-  textarea,
-  button {
-    font: 400 1rem "Nunito", sans-serif;
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%;
   }
-  
-  button {
-    cursor: pointer;
-  }
-  
-  @media (max-width: 1080px) {
-    html {
-      font-size: 93.75%;
-    }
-  }
-  
-  @media (max-width: 720px) {
-    html {
-      font-size: 87.5%;
-    }
-  }
+}
