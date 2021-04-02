@@ -70,7 +70,7 @@ function TotemMap() {
   try {
     lati = Number(qrParam.split(",")[0]);
     longi = Number(qrParam.split(",")[1]);
-  } catch (error) {}
+  } catch (error) { }
 
   useEffect(() => {
     api.get("totems").then((response) => {
@@ -145,7 +145,7 @@ function TotemMap() {
       )}
       <footer>
         <span>
-          autoria <a href="https://github.com/lian-fernandes">lian</a>
+          autoria <a href="https://lianaraujo.github.io/">lian</a>
         </span>
       </footer>
     </div>
