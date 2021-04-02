@@ -145,7 +145,7 @@ function TotemMap() {
       )}
       <footer>
         <span>
-          autoria <a href="https://lianaraujo.github.io/">lian</a>
+          autoria <a href="https://lianaraujo.github.io/">lianaraujo.github.io</a>
         </span>
       </footer>
     </div>
