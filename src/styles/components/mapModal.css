@@ -38,13 +38,13 @@
 }
 
 #modal-img {
+  margin-right: 2em;
   max-height: 100%;
   width: auto;
 }
 
 .description p {
   line-height: 1.2;
-  overflow: auto;
 }
 
 .modal button {

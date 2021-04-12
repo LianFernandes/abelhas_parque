@@ -29,8 +29,8 @@ const mapIcon = L.icon({
 
 const beeIcon = L.icon({
   iconUrl: beeMarker,
-  iconSize: [40, 60],
-  iconAnchor: [20, 60],
+  iconSize: [30, 50],
+  iconAnchor: [15, 50],
   popupAnchor: [170, 10],
 });
 

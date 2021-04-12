@@ -20,7 +20,7 @@ export function MapModal(props: MapModalProps) {
           </div>
           <img
             id="modal-img"
-            src={`imgtest/${props.name}.jpeg`}
+            src={`imgtest/${props.name}.png`}
             alt="zumzum"
           />
         </div>
